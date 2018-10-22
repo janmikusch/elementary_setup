@@ -16,12 +16,12 @@ apt update
 apt upgrade -y
 
 # enable ppa
-apt install software-properties-common --no-install-recommends
+apt install software-properties-common --no-install-recommends -y
 
 #add ppa
-add-apt-repository ppa:git-core/ppa
-add-apt-repository ppa:philip.scott/elementary-tweaks
-add-apt-repository ppa:alexlarsson/flatpak
+add-apt-repository ppa:git-core/ppa -y
+add-apt-repository ppa:philip.scott/elementary-tweaks -y
+add-apt-repository ppa:alexlarsson/flatpak -y
 
 apt update
 
