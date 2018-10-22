@@ -47,7 +47,7 @@ curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.s
 #composer
 curl -sS https://getcomposer.org/installer -o composer-setup.php
 php composer-setup.php --install-dir=/usr/local/bin --filename=composer
-composer
+sudo -u $SUDO_USER composer
 
 
 
