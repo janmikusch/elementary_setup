@@ -5,9 +5,9 @@ if [ "$EUID" -ne 0 ]
 fi
 
 #working dir
-mkdir ~/Apps
-mkdir ~/install
-cd ~/install
+sudo -u $SUDO_USER mkdir ~/Apps
+sudo -u $SUDO_USER mkdir ~/install
+sudo -u $SUDO_USER cd ~/install
 
 
 
@@ -42,10 +42,10 @@ apt-get install elementary-tweaks -y
 
 
 #git lfs
-curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
+sudo -u $SUDO_USER curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
 
 #composer
-curl -sS https://getcomposer.org/installer -o composer-setup.php
+sudo -u $SUDO_USER curl -sS https://getcomposer.org/installer -o composer-setup.php
 php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 sudo -u $SUDO_USER composer
 
@@ -70,7 +70,7 @@ apt install flatpak -y
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 #flathub software
-sudo -u $SUDO_USER flatpak install flathub org.gtk.Gtk3theme.elementary
+sudo -u $SUDO_USER flatpak install flathub org.gtk.Gtk3theme.elementary -y
 sudo -u $SUDO_USER flatpak install flathub org.libreoffice.LibreOffice -y
 sudo -u $SUDO_USER flatpak install flathub org.gimp.GIMP -y
 sudo -u $SUDO_USER flatpak install flathub com.spotify.Client -y
@@ -100,19 +100,19 @@ snap install firefox
 
 
 #JetBrains Toolbox
-wget https://download.jetbrains.com/toolbox/jetbrains-toolbox-1.11.4269.tar.gz
+sudo -u $SUDO_USER wget https://download.jetbrains.com/toolbox/jetbrains-toolbox-1.11.4269.tar.gz
 tar -xvf jetbrains-toolbox-1.11.4269.tar.gz
-cd jetbrains-toolbox-1.11.4269/
-cp ./jetbrains-toolbox ~/Apps/jetbrains-toolbox
+sudo -u $SUDO_USER cd jetbrains-toolbox-1.11.4269/
+sudo -u $SUDO_USER cp ./jetbrains-toolbox ~/Apps/jetbrains-toolbox
 chmod a+x ~/Apps/jetbrains-toolbox
-cd ~/install
+sudo -u $SUDO_USER cd ~/install
 
 
 
 
 
 #VmWare
-wget https://download3.vmware.com/software/player/file/VMware-Player-15.0.0-10134415.x86_64.bundle
+sudo -u $SUDO_USER wget https://download3.vmware.com/software/player/file/VMware-Player-15.0.0-10134415.x86_64.bundle
 chmod +x VMware-Player*
 cp ./VMware-Player-* ~/VMware-Player-install.run
 
@@ -120,25 +120,26 @@ cp ./VMware-Player-* ~/VMware-Player-install.run
 
 
 #franz
-wget https://github.com/meetfranz/franz/releases/download/v5.0.0-beta.18/franz-5.0.0-beta.18-x86_64.AppImage
+sudo -u $SUDO_USER wget https://github.com/meetfranz/franz/releases/download/v5.0.0-beta.18/franz-5.0.0-beta.18-x86_64.AppImage
 chmod +x franz-*
 cp ./franz-* ~/Apps/franz
 
 
 #lastpass
-wget https://download.cloud.lastpass.com/linux/lplinux.tar.bz2
+sudo -u $SUDO_USER wget https://download.cloud.lastpass.com/linux/lplinux.tar.bz2
 cp ./lplinux.tar.bz2 ~/Apps/lastpass.tar.bz2
 
 
-wget https://global.download.synology.com/download/Tools/SynologyDriveClient/1.1.2-10562/Ubuntu/Installer/x86_64/synology-drive-10562.x86_64.deb
-wget https://global.download.synology.com/download/Tools/CloudStationBackup/4.2.8-4421/Ubuntu/Installer/x86_64/synology-cloud-station-backup-4421.x86_64.deb
-cp ./synology-drive-10562.x86_64.deb ~/Apps/synology-drive-10562.x86_64.deb
-cp ./synology-cloud-station-backup-4421.x86_64.deb ~/Apps/synology-cloud-station-backup-4421.x86_64.deb
+#synology
+sudo -u $SUDO_USER wget https://global.download.synology.com/download/Tools/SynologyDriveClient/1.1.2-10562/Ubuntu/Installer/x86_64/synology-drive-10562.x86_64.deb
+sudo -u $SUDO_USER wget https://global.download.synology.com/download/Tools/CloudStationBackup/4.2.8-4421/Ubuntu/Installer/x86_64/synology-cloud-station-backup-4421.x86_64.deb
+sudo -u $SUDO_USER cp ./synology-drive-10562.x86_64.deb ~/Apps/synology-drive-10562.x86_64.deb
+sudo -u $SUDO_USER cp ./synology-cloud-station-backup-4421.x86_64.deb ~/Apps/synology-cloud-station-backup-4421.x86_64.deb
 
+
+
+#clear
 apt autoremove -y
-
-
-
 rm -r ~/install
 
 echo "Please restart your system now!"
