@@ -67,7 +67,7 @@ apt update
 apt install flatpak -y
 
 #Add the Flathub repository
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+sudo -u $SUDO_USER flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 #flathub software
 sudo -u $SUDO_USER flatpak install flathub org.gtk.Gtk3theme.elementary -y
