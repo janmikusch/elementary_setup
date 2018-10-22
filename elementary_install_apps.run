@@ -92,7 +92,7 @@ sudo -u $SUDO_USER flatpak install flathub com.valvesoftware.Steam -y
 #snaps
 apt install snapd -y
 apt install com.github.bartzaalberg.snaptastic -y
-sudo -u $SUDO_USERsnap install firefox
+snap install firefox
 
 
 
