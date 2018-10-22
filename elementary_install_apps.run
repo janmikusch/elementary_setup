@@ -1,0 +1,144 @@
+#!/bin/bash
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root"
+  exit
+fi
+
+#working dir
+mkdir ~/Apps
+mkdir ~/install
+cd ~/install
+
+
+
+# update system
+apt update
+apt upgrade -y
+
+# enable ppa
+apt install software-properties-common --no-install-recommends
+
+#add ppa
+add-apt-repository ppa:git-core/ppa
+add-apt-repository ppa:philip.scott/elementary-tweaks
+add-apt-repository ppa:alexlarsson/flatpak
+
+apt update
+
+#apt install
+apt install gcc build-essential linux-headers-$(uname -r) -y
+apt install php7.2 php7.2-cli php7.2-common php7.2-curl php7.2-json php7.2-mysql php7.2-pgsql php7.2-sqlite3 php7.2-xml php7.2-zip -y
+apt install php7.3 php7.3-cli php7.3-common php7.3-curl php7.3-json php7.3-mysql php7.3-pgsql php7.3-sqlite3 php7.3-xml php7.3-zip -y
+apt install curl php-cli php-mbstring git unzip -y
+apt install npm build-essential -y
+apt install com.github.donadigo.eddy -y
+apt install git -y
+apt install com.github.davidmhewitt.torrential -y
+apt install com.github.stsdc.monitor -y
+apt install gparted -y
+apt-get install elementary-tweaks -y
+
+
+
+
+#git lfs
+curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
+
+#composer
+curl -sS https://getcomposer.org/installer -o composer-setup.php
+php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+composer
+
+
+
+
+#mono
+apt install apt-transport-https dirmngr
+apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+echo "deb https://download.mono-project.com/repo/ubuntu vs-bionic main" | sudo tee /etc/apt/sources.list.d/mono-official-vs.list
+apt update
+apt-get install monodevelop -y
+
+
+
+
+#flatpak
+apt update
+apt install flatpak -y
+
+#Add the Flathub repository
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+#flathub software
+sudo -u $SUDO_USER flatpak install flathub org.libreoffice.LibreOffice -y
+sudo -u $SUDO_USER flatpak install flathub org.gimp.GIMP -y
+sudo -u $SUDO_USER flatpak install flathub com.spotify.Client -y
+sudo -u $SUDO_USER flatpak install flathub com.visualstudio.code -y
+sudo -u $SUDO_USER flatpak install flathub org.videolan.VLC -y
+sudo -u $SUDO_USER flatpak install flathub org.telegram.desktop -y
+sudo -u $SUDO_USER flatpak install flathub org.filezillaproject.Filezilla -y
+sudo -u $SUDO_USER flatpak install flathub com.jgraph.drawio.desktop -y
+sudo -u $SUDO_USER flatpak install flathub fr.handbrake.ghb -y
+sudo -u $SUDO_USER flatpak install flathub com.axosoft.GitKraken -y
+sudo -u $SUDO_USER flatpak install flathub com.elsevier.MendeleyDesktop -y
+sudo -u $SUDO_USER flatpak install flathub com.valvesoftware.Steam -y
+sudo -u $SUDO_USER flatpak install flathub org.blender.Blender -y 
+sudo -u $SUDO_USER flatpak install flathub org.filezillaproject.Filezilla -y
+sudo -u $SUDO_USER flatpak install flathub com.valvesoftware.Steam -y
+
+
+
+#snaps
+apt install snapd -y
+apt install com.github.bartzaalberg.snaptastic -y
+snap install firefox
+
+
+
+
+
+
+#JetBrains Toolbox
+wget https://download.jetbrains.com/toolbox/jetbrains-toolbox-1.11.4269.tar.gz
+tar -xvf jetbrains-toolbox-1.11.4269.tar.gz
+cd jetbrains-toolbox-1.11.4269/
+cp ./jetbrains-toolbox ~/Apps/jetbrains-toolbox
+chmod a+x ~/Apps/jetbrains-toolbox
+cd ~/install
+
+
+
+
+
+#VmWare
+wget https://download3.vmware.com/software/player/file/VMware-Player-15.0.0-10134415.x86_64.bundle
+chmod +x VMware-Player*
+cp ./VMware-Player-* ~/VMware-Player-install.run
+
+
+
+
+#franz
+wget https://github.com/meetfranz/franz/releases/download/v5.0.0-beta.18/franz-5.0.0-beta.18-x86_64.AppImage
+chmod +x franz-*
+cp ./franz-* ~/Apps/franz
+
+
+#lastpass
+wget https://download.cloud.lastpass.com/linux/lplinux.tar.bz2
+cp ./lplinux.tar.bz2 ~/Apps/lastpass.tar.bz2
+
+
+wget https://global.download.synology.com/download/Tools/SynologyDriveClient/1.1.2-10562/Ubuntu/Installer/x86_64/synology-drive-10562.x86_64.deb
+wget https://global.download.synology.com/download/Tools/CloudStationBackup/4.2.8-4421/Ubuntu/Installer/x86_64/synology-cloud-station-backup-4421.x86_64.deb
+cp ./synology-drive-10562.x86_64.deb ~/Apps/synology-drive-10562.x86_64.deb
+cp ./synology-cloud-station-backup-4421.x86_64.deb ~/Apps/synology-cloud-station-backup-4421.x86_64.deb
+
+apt autoremove -y
+
+
+
+rm -r ~/install
+
+echo "Please restart your system now!"
+echo "~/Apps/ contains other apps to install"
