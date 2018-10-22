@@ -114,7 +114,7 @@ sudo -u $SUDO_USER cd ~/install
 #VmWare
 sudo -u $SUDO_USER wget https://download3.vmware.com/software/player/file/VMware-Player-15.0.0-10134415.x86_64.bundle
 chmod +x VMware-Player*
-cp ./VMware-Player-* ~/VMware-Player-install.run
+sudo -u $SUDO_USER cp ./VMware-Player-* ~/Apps/VMware-Player-install.run
 
 
 
@@ -122,12 +122,12 @@ cp ./VMware-Player-* ~/VMware-Player-install.run
 #franz
 sudo -u $SUDO_USER wget https://github.com/meetfranz/franz/releases/download/v5.0.0-beta.18/franz-5.0.0-beta.18-x86_64.AppImage
 chmod +x franz-*
-cp ./franz-* ~/Apps/franz
+sudo -u $SUDO_USER cp ./franz-* ~/Apps/franz
 
 
 #lastpass
 sudo -u $SUDO_USER wget https://download.cloud.lastpass.com/linux/lplinux.tar.bz2
-cp ./lplinux.tar.bz2 ~/Apps/lastpass.tar.bz2
+sudo -u $SUDO_USER cp ./lplinux.tar.bz2 ~/Apps/lastpass.tar.bz2
 
 
 #synology
